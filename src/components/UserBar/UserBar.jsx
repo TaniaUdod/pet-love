@@ -6,7 +6,10 @@ import sprite from "../../images/sprite.svg";
 
 const UserBar = () => {
   const user = useSelector(selectUser);
-  const avatar = user.avatar || (
+
+  const avatar = user.avatar ? (
+    <img src={user.avatar} alt="user avatar" />
+  ) : (
     <svg width="24" height="24">
       <use href={`${sprite}#icon-user`} />
     </svg>
@@ -15,7 +18,7 @@ const UserBar = () => {
   return (
     <>
       <Link to="/profile">
-        <img src={avatar} alt="user avatar" />
+        {avatar}
         <p>{user.name}</p>
       </Link>
     </>

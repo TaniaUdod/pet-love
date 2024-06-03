@@ -23,6 +23,10 @@ export const Header = styled.header`
   align-items: center;
   padding: 28px 0 20px;
 
+  @media screen and (min-width: 768px) {
+    padding: 32px 0;
+  }
+
   @media screen and (min-width: 1280px) {
     padding: 32px;
   }

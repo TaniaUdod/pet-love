@@ -20,6 +20,7 @@ const initialState = {
   user: {
     name: null,
     email: null,
+    avatar: null,
     pets: [],
     noticesViewed: [],
     noticesFavorites: [],

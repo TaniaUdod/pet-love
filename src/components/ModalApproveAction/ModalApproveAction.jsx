@@ -11,7 +11,7 @@ import {
   ModalOverlay,
 } from "./ModalApproveAction.styled";
 
-const ModalApproveAction = (onClose) => {
+const ModalApproveAction = ({ onClose }) => {
   const dispatch = useDispatch();
 
   const handleClose = () => {
