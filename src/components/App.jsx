@@ -36,11 +36,13 @@ const App = () => {
         <Route path="/friends" element={<OurFriends />} />
         <Route
           path="/register"
-          element={<PublicRoute redirectTo="/" component={<Register />} />}
+          element={
+            <PublicRoute redirectTo="/profile" component={<Register />} />
+          }
         />
         <Route
           path="/login"
-          element={<PublicRoute redirectTo="/" component={<Login />} />}
+          element={<PublicRoute redirectTo="/profile" component={<Login />} />}
         />
         <Route
           path="/profile"

@@ -1,11 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectUser } from "../../store/auth/selectors";
+import { selectIsLoggedIn, selectUser } from "../../store/auth/selectors";
 import sprite from "../../images/sprite.svg";
 
 const UserBar = () => {
   const user = useSelector(selectUser);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
+  if (!isLoggedIn) {
+    return null;
+  }
 
   const avatar = user.avatar ? (
     <img src={user.avatar} alt="user avatar" />

@@ -11,7 +11,7 @@ import {
 } from "./operations";
 
 const handleFulfilled = (state, action) => {
-  state.user = action.payload.user;
+  state.user = action.payload.user || action.payload;
   state.token = action.payload.token;
   state.isLoggedIn = true;
 };
@@ -43,6 +43,7 @@ const authSlice = createSlice({
         state.user = {
           name: null,
           email: null,
+          avatar: null,
           pets: [],
           noticesViewed: [],
           noticesFavorites: [],

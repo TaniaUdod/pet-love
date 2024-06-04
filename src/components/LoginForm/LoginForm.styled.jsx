@@ -138,7 +138,7 @@ export const Button = styled.button`
   line-height: 18px;
   letter-spacing: -0.42px;
   text-transform: uppercase;
-  margin-top: 24px;
+  margin-top: 40px;
   transition: transform 150ms linear, background-color 150ms linear;
 
   &:hover {
@@ -152,6 +152,6 @@ export const Button = styled.button`
     letter-spacing: -0.48px;
     max-width: 424px;
     height: 52px;
-    margin-top: 32px;
+    margin-top: 64px;
   }
 `;

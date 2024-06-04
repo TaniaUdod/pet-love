@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../store/auth/operations";
 import cat from "../../images/cat.png";
@@ -13,6 +14,7 @@ import {
 
 const ModalApproveAction = ({ onClose }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleClose = () => {
     onClose();
@@ -20,13 +22,13 @@ const ModalApproveAction = ({ onClose }) => {
 
   const handleConfirm = () => {
     dispatch(logOut());
+    navigate("/");
     onClose();
   };
 
   const handleBackdropClick = (event) => {
     if (event.currentTarget === event.target) {
       onClose();
-      document.body.style.overflow = "visible";
     }
   };
 
