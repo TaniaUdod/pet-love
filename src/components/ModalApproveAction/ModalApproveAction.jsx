@@ -7,9 +7,14 @@ import cat from "../../images/cat.png";
 import cat2x from "../../images/cat@2x.png";
 import sprite from "../../images/sprite.svg";
 import {
+  ButtonCancel,
+  ButtonConfirm,
+  ButtonWrap,
   CloseButton,
   ModalContent,
   ModalOverlay,
+  Span,
+  Text,
 } from "./ModalApproveAction.styled";
 
 const ModalApproveAction = ({ onClose }) => {
@@ -55,13 +60,17 @@ const ModalApproveAction = ({ onClose }) => {
           </svg>
         </CloseButton>
         <div>
-          <picture style={{ margin: "0 auto" }}>
-            <source srcSet={cat2x} media="(min-resolution: 192dpi)" />
-            <img src={cat} alt="cat" width="44px" height="44px" />
-          </picture>
-          <p>Already leaving?</p>
-          <button onClick={handleConfirm}>Yes</button>
-          <button onClick={handleClose}>Cancel</button>
+          <Span>
+            <picture>
+              <source srcSet={cat2x} media="(min-resolution: 192dpi)" />
+              <img src={cat} alt="cat" width="44px" height="44px" />
+            </picture>
+          </Span>
+          <Text>Already leaving?</Text>
+          <ButtonWrap>
+            <ButtonConfirm onClick={handleConfirm}>Yes</ButtonConfirm>
+            <ButtonCancel onClick={handleClose}>Cancel</ButtonCancel>
+          </ButtonWrap>
         </div>
       </ModalContent>
     </ModalOverlay>,

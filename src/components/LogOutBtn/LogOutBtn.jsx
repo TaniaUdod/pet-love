@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ModalApproveAction from "../ModalApproveAction/ModalApproveAction";
+import { Button, ButtonWrap } from "./LogOutBtn.styled";
 
 const LogOutBtn = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,10 +14,10 @@ const LogOutBtn = () => {
   };
 
   return (
-    <>
-      <button onClick={openModal}>Log out</button>
+    <ButtonWrap>
+      <Button onClick={openModal}>Log out</Button>
       {isModalOpen && <ModalApproveAction onClose={closeModal} />}
-    </>
+    </ButtonWrap>
   );
 };
 

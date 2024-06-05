@@ -5,11 +5,15 @@ export const Nav = styled.nav`
   display: none;
 
   @media screen and (min-width: 768px) {
-    display: flex;
+    display: ${({ ishome }) => (ishome ? "none" : "flex")};
     justify-content: space-between;
     align-items: center;
     gap: 8px;
     margin-left: auto;
+  }
+
+  @media screen and (min-width: 1280px) {
+    display: flex;
   }
 `;
 
@@ -21,12 +25,16 @@ export const LinkLogin = styled(Link)`
   text-transform: uppercase;
   padding: 15px 35px;
   border-radius: 30px;
+  border: ${({ ishome }) =>
+    ishome ? "1px solid rgba(255, 255, 255, 0.40)" : "none"};
   background-color: #f6b83d;
-  transition: transform 150ms linear, background-color 150ms linear;
+  transition: transform 150ms linear, background-color 150ms linear,
+    color 150ms linear;
 
   &:hover {
     transform: scale(1.1);
-    background-color: #f9b020;
+    color: ${({ ishome }) => (ishome ? "#f6b83d" : "#ffffff")};
+    background-color: ${({ ishome }) => (ishome ? "#FFF4DF" : "#f9b020")};
   }
 `;
 

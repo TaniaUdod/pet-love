@@ -1,13 +1,14 @@
 import React from "react";
 import UserBar from "../UserBar/UserBar";
 import LogOutBtn from "../LogOutBtn/LogOutBtn";
+import { Nav } from "./UserNav.styled";
 
-const UserNav = () => {
+const UserNav = ({ ishome }) => {
   return (
-    <nav>
-      <LogOutBtn />
-      <UserBar />
-    </nav>
+    <Nav>
+      {!ishome && <LogOutBtn />}
+      <UserBar ishome={ishome} />
+    </Nav>
   );
 };
 

@@ -21,14 +21,14 @@ export const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 28px 0 20px;
+  padding: ${({ ishome }) => (ishome ? "28px 20px 20px" : "28px 0 20px")};
 
   @media screen and (min-width: 768px) {
-    padding: 32px 0;
+    padding: ${({ ishome }) => (ishome ? "32px" : "32px 0")};
   }
 
   @media screen and (min-width: 1280px) {
-    padding: 32px;
+    padding: ${({ ishome }) => (ishome ? "32px 64px" : "32px")};
   }
 `;
 
@@ -42,12 +42,22 @@ export const LogoWrap = styled.div`
     transform: scale(1.1);
   }
 
+  svg {
+    width: 17px;
+    height: 17px;
+  }
+
   @media screen and (min-width: 768px) {
     margin-right: 271px;
+
+    svg {
+      width: 23px;
+      height: 23px;
+    }
   }
 
   @media screen and (min-width: 1280px) {
-    margin-right: 313px;
+    margin-right: 280px;
   }
 `;
 
@@ -56,6 +66,7 @@ export const LogoText = styled.p`
   font-weight: 700;
   line-height: 20px;
   letter-spacing: -0.8px;
+  color: ${({ ishome }) => (ishome ? "#ffffff" : "#262626")};
 
   @media screen and (min-width: 768px) {
     font-size: 28px;
@@ -95,11 +106,21 @@ export const LinkStyled = styled(NavLink)`
       border-color: #f6b83d;
     }
   }
+
+  @media screen and (min-width: 1280px) {
+    border-radius: 30px;
+    border: ${({ ishome }) =>
+      ishome
+        ? "1px solid rgba(255, 255, 255, 0.40)"
+        : "1px solid rgba(38, 38, 38, 0.15)"};
+    color: ${({ ishome }) => (ishome ? "#ffffff" : "#262626")};
+  }
 `;
 
 export const BurgerButton = styled.button`
   width: 32px;
   height: 32px;
+  margin-left: 12px;
   transition: transform 150ms linear;
 
   &:hover {
@@ -112,6 +133,10 @@ export const BurgerButton = styled.button`
 
   svg:hover {
     stroke: #f6b83d;
+  }
+
+  svg.home:hover {
+    stroke: #ffffff;
   }
 
   @media screen and (min-width: 768px) {
@@ -199,6 +224,28 @@ export const LinkMobStyled = styled(NavLink)`
 
   &.active {
     border-color: #f6b83d;
+  }
+`;
+
+export const LogoutButton = styled.button`
+  color: #f6b83d;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: -0.42px;
+  text-transform: uppercase;
+  width: 178px;
+  height: 42px;
+  border-radius: 30px;
+  background-color: #fff4df;
+  transition: transform 150ms linear;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  @media screen and (min-width: 768px) {
+    margin: 0 auto;
   }
 `;
 

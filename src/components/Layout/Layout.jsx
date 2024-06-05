@@ -1,11 +1,12 @@
 import React, { Suspense, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../../store/auth/selectors";
 import sprite from "../../images/sprite.svg";
 import Loader from "../Loader/Loader";
 import AuthNav from "../AuthNav/AuthNav";
 import UserNav from "../UserNav/UserNav";
+import ModalApproveAction from "../ModalApproveAction/ModalApproveAction";
 import {
   BurgerButton,
   BurgerMenu,
@@ -16,6 +17,7 @@ import {
   LinkStyled,
   LogoText,
   LogoWrap,
+  LogoutButton,
   MobLinkLogin,
   MobLinkNav,
   MobLinkRegister,
@@ -27,6 +29,9 @@ const Layout = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
+  const location = useLocation();
+  const ishome = location.pathname === "/" ? true : false;
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -35,28 +40,50 @@ const Layout = () => {
     setIsMenuOpen(false);
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <Container>
-      <Header>
+      <Header ishome={ishome}>
         <Link to="/">
           <LogoWrap>
-            <LogoText>petl</LogoText>
-            <svg width="23" height="23">
+            <LogoText ishome={ishome}>petl</LogoText>
+            <svg fill={ishome ? "#FFFFFF" : "#F6B83D"}>
               <use href={`${sprite}#icon-logo`} />
             </svg>
-            <LogoText>ve</LogoText>
+            <LogoText ishome={ishome}>ve</LogoText>
           </LogoWrap>
         </Link>
 
         <Nav>
-          <LinkStyled to="/news">News</LinkStyled>
-          <LinkStyled to="/notices">Find pet</LinkStyled>
-          <LinkStyled to="/friends">Our friends</LinkStyled>
+          <LinkStyled to="/news" ishome={ishome}>
+            News
+          </LinkStyled>
+          <LinkStyled to="/notices" ishome={ishome}>
+            Find pet
+          </LinkStyled>
+          <LinkStyled to="/friends" ishome={ishome}>
+            Our friends
+          </LinkStyled>
         </Nav>
-        {isLoggedIn ? <UserNav /> : <AuthNav />}
+        {isLoggedIn ? <UserNav ishome={ishome} /> : <AuthNav ishome={ishome} />}
 
         <BurgerButton type="button" onClick={toggleMenu}>
-          <svg width="32" height="32" fill="none" stroke="#262626">
+          <svg
+            width="32"
+            height="32"
+            fill="none"
+            stroke={ishome ? "#FFFFFF" : "#262626"}
+            className={ishome ? "home" : ""}
+          >
             <use href={`${sprite}#icon-menu`} />
           </svg>
         </BurgerButton>
@@ -81,15 +108,21 @@ const Layout = () => {
           </LinkMobStyled>
         </MobNav>
 
-        <MobLinkNav>
-          <MobLinkLogin to="/login" onClick={closeMenu}>
-            Log In
-          </MobLinkLogin>
-          <MobLinkRegister to="/register" onClick={closeMenu}>
-            Registration
-          </MobLinkRegister>
-        </MobLinkNav>
-        {/* {isLoggedIn ? <UserNav /> : <AuthNav />} */}
+        {isLoggedIn ? (
+          <>
+            <LogoutButton onClick={openModal}>Log out</LogoutButton>
+            {isModalOpen && <ModalApproveAction onClose={closeModal} />}
+          </>
+        ) : (
+          <MobLinkNav>
+            <MobLinkLogin to="/login" onClick={closeMenu}>
+              Log In
+            </MobLinkLogin>
+            <MobLinkRegister to="/register" onClick={closeMenu}>
+              Registration
+            </MobLinkRegister>
+          </MobLinkNav>
+        )}
       </BurgerMenu>
 
       <main>
