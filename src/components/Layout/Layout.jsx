@@ -30,7 +30,7 @@ const Layout = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const location = useLocation();
-  const ishome = location.pathname === "/" ? true : false;
+  const ishome = location.pathname === "/";
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -52,29 +52,33 @@ const Layout = () => {
 
   return (
     <Container>
-      <Header ishome={ishome}>
+      <Header ishome={ishome.toString()}>
         <Link to="/">
           <LogoWrap>
-            <LogoText ishome={ishome}>petl</LogoText>
+            <LogoText ishome={ishome.toString()}>petl</LogoText>
             <svg fill={ishome ? "#FFFFFF" : "#F6B83D"}>
               <use href={`${sprite}#icon-logo`} />
             </svg>
-            <LogoText ishome={ishome}>ve</LogoText>
+            <LogoText ishome={ishome.toString()}>ve</LogoText>
           </LogoWrap>
         </Link>
 
         <Nav>
-          <LinkStyled to="/news" ishome={ishome}>
+          <LinkStyled to="/news" ishome={ishome.toString()}>
             News
           </LinkStyled>
-          <LinkStyled to="/notices" ishome={ishome}>
+          <LinkStyled to="/notices" ishome={ishome.toString()}>
             Find pet
           </LinkStyled>
-          <LinkStyled to="/friends" ishome={ishome}>
+          <LinkStyled to="/friends" ishome={ishome.toString()}>
             Our friends
           </LinkStyled>
         </Nav>
-        {isLoggedIn ? <UserNav ishome={ishome} /> : <AuthNav ishome={ishome} />}
+        {isLoggedIn ? (
+          <UserNav ishome={ishome.toString()} />
+        ) : (
+          <AuthNav ishome={ishome.toString()} />
+        )}
 
         <BurgerButton type="button" onClick={toggleMenu}>
           <svg

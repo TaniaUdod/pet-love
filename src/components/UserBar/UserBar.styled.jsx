@@ -26,6 +26,6 @@ export const UserName = styled.p`
     font-weight: 700;
     line-height: 20px;
     letter-spacing: -0.6px;
-    color: ${({ ishome }) => (ishome ? "#ffffff" : "#262626")};
+    color: ${({ ishome }) => (ishome === "true" ? "#ffffff" : "#262626")};
   }
 `;

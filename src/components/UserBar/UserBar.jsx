@@ -23,7 +23,7 @@ const UserBar = ({ ishome }) => {
   return (
     <StyledLink to="/profile">
       <Button type="button">{avatar}</Button>
-      <UserName ishome={ishome}>{user.name}</UserName>
+      <UserName ishome={ishome.toString()}>{user.name}</UserName>
     </StyledLink>
   );
 };

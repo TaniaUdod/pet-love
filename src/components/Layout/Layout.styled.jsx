@@ -21,14 +21,15 @@ export const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: ${({ ishome }) => (ishome ? "28px 20px 20px" : "28px 0 20px")};
+  padding: ${({ ishome }) =>
+    ishome === "true" ? "28px 20px 20px" : "28px 0 20px"};
 
   @media screen and (min-width: 768px) {
-    padding: ${({ ishome }) => (ishome ? "32px" : "32px 0")};
+    padding: ${({ ishome }) => (ishome === "true" ? "32px" : "32px 0")};
   }
 
   @media screen and (min-width: 1280px) {
-    padding: ${({ ishome }) => (ishome ? "32px 64px" : "32px")};
+    padding: ${({ ishome }) => (ishome === "true" ? "32px 64px" : "32px")};
   }
 `;
 
@@ -66,7 +67,7 @@ export const LogoText = styled.p`
   font-weight: 700;
   line-height: 20px;
   letter-spacing: -0.8px;
-  color: ${({ ishome }) => (ishome ? "#ffffff" : "#262626")};
+  color: ${({ ishome }) => (ishome === "true" ? "#ffffff" : "#262626")};
 
   @media screen and (min-width: 768px) {
     font-size: 28px;
@@ -110,10 +111,10 @@ export const LinkStyled = styled(NavLink)`
   @media screen and (min-width: 1280px) {
     border-radius: 30px;
     border: ${({ ishome }) =>
-      ishome
+      ishome === "true"
         ? "1px solid rgba(255, 255, 255, 0.40)"
         : "1px solid rgba(38, 38, 38, 0.15)"};
-    color: ${({ ishome }) => (ishome ? "#ffffff" : "#262626")};
+    color: ${({ ishome }) => (ishome === "true" ? "#ffffff" : "#262626")};
   }
 `;
 
