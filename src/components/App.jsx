@@ -1,12 +1,10 @@
 import { lazy, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { refreshUser } from "../store/auth/operations";
-import { selectIsRefreshing } from "../store/auth/selectors";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 import Layout from "./Layout/Layout";
-import Loader from "./Loader/Loader";
 import Profile from "./Profile/Profile";
 
 const Home = lazy(() => import("../pages/Home/Home"));
@@ -19,15 +17,12 @@ const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
 
 const App = () => {
   const dispatch = useDispatch();
-  const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return isRefreshing ? (
-    <Loader />
-  ) : (
+  return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />

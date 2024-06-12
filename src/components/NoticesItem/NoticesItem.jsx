@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addNotice,
@@ -26,6 +26,7 @@ import {
   Title,
   TitleWrap,
 } from "./NoticesItem.styled";
+import ModalFirstItemNotice from "../ModalFirstItemNotice/ModalFirstItemNotice";
 
 const NoticesItem = ({
   _id,
@@ -43,11 +44,16 @@ const NoticesItem = ({
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const [showAttentionModal, setShowAttentionModal] = useState(false);
   const [showNoticeModal, setShowNoticeModal] = useState(false);
+  const [showFirstNotice, setShowFirstNotice] = useState(false);
 
   const favoritesNotices = useSelector(selectFavoritesNotices);
   const [isFavorite, setIsFavorite] = useState(
     favoritesNotices?.find((favorite) => (favorite._id === _id ? true : false))
   );
+
+  useEffect(() => {
+    setIsFavorite(favoritesNotices?.some((favorite) => favorite._id === _id));
+  }, [favoritesNotices, _id]);
 
   const handleLearnMore = () => {
     if (!isLoggedIn) {
@@ -62,10 +68,15 @@ const NoticesItem = ({
     if (!isLoggedIn) {
       setShowAttentionModal(true);
     } else {
-      if (isLoggedIn) {
-        isFavorite
-          ? dispatch(deleteNotice(_id)) && setIsFavorite(false)
-          : dispatch(addNotice(_id)) && setIsFavorite(true);
+      if (isFavorite) {
+        dispatch(deleteNotice(_id));
+        setIsFavorite(false);
+      } else {
+        if (favoritesNotices?.length === 0) {
+          setShowFirstNotice(true);
+        }
+        dispatch(addNotice(_id));
+        setIsFavorite(true);
       }
     }
   };
@@ -73,6 +84,10 @@ const NoticesItem = ({
   const closeModal = () => {
     setShowAttentionModal(false);
     setShowNoticeModal(false);
+  };
+
+  const closeModalFirstItemNotice = () => {
+    setShowFirstNotice(false);
   };
 
   return (
@@ -138,6 +153,15 @@ const NoticesItem = ({
           setIsFavorite={setIsFavorite}
           noticeId={_id}
           onClose={closeModal}
+          setShowFirstNotice={setShowFirstNotice}
+        />
+      )}
+
+      {showFirstNotice && (
+        <ModalFirstItemNotice
+          onClose={closeModalFirstItemNotice}
+          setShowFirstNotice={setShowFirstNotice}
+          showFirstNotice={showFirstNotice}
         />
       )}
     </NoticesItemContainer>

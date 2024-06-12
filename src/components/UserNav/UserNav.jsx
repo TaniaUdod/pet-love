@@ -2,11 +2,15 @@ import React from "react";
 import UserBar from "../UserBar/UserBar";
 import LogOutBtn from "../LogOutBtn/LogOutBtn";
 import { Nav } from "./UserNav.styled";
+import { useLocation } from "react-router-dom";
 
 const UserNav = ({ ishome }) => {
+  const location = useLocation();
+  const ishomepage = location.pathname === "/";
+
   return (
     <Nav>
-      {!ishome && <LogOutBtn />}
+      {!ishomepage && <LogOutBtn />}
       <UserBar ishome={ishome} />
     </Nav>
   );

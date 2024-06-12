@@ -8,7 +8,7 @@ import {
   getOneNotice,
 } from "../../store/notices/operations";
 import { selectNotices } from "../../store/notices/selectors";
-// import { selectFavoritesNotices } from "../../store/auth/selectors";
+import { selectFavoritesNotices } from "../../store/auth/selectors";
 import sprite from "../../images/sprite.svg";
 import StarRating from "../StarRating/StarRating";
 import { formatBirthday } from "../../helpers/formatBirthday";
@@ -27,13 +27,19 @@ import {
   Title,
 } from "./ModalNotice.styled";
 
-const ModalNotice = ({ onClose, noticeId, isFavorite, setIsFavorite }) => {
+const ModalNotice = ({
+  isFavorite,
+  noticeId,
+  onClose,
+  setIsFavorite,
+  setShowFirstNotice,
+}) => {
   const dispatch = useDispatch();
 
   const allNotices = useSelector(selectNotices);
   const notice = allNotices.results.find((item) => item._id === noticeId);
 
-  //   const favoritesNotices = useSelector(selectFavoritesNotices);
+  const favoritesNotices = useSelector(selectFavoritesNotices) || [];
 
   useEffect(() => {
     dispatch(getOneNotice(noticeId));
@@ -70,6 +76,9 @@ const ModalNotice = ({ onClose, noticeId, isFavorite, setIsFavorite }) => {
       dispatch(deleteNotice(noticeId));
       setIsFavorite(false);
     } else {
+      if (favoritesNotices.length === 0) {
+        setShowFirstNotice(true);
+      }
       dispatch(addNotice(noticeId));
       setIsFavorite(true);
     }

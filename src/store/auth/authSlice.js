@@ -6,12 +6,12 @@ import {
   register,
   userAddPet,
   userEdit,
-  userFullInfo,
+  // userFullInfo,
   userRemovePet,
 } from "./operations";
 
 const handleFulfilled = (state, action) => {
-  state.user = action.payload.user || action.payload;
+  state.user = action.payload;
   state.token = action.payload.token;
   state.isLoggedIn = true;
 };
@@ -20,11 +20,12 @@ const initialState = {
   user: {
     name: null,
     email: null,
+    phone: null,
     avatar: null,
-    pets: [],
-    noticesViewed: [],
-    noticesFavorites: [],
   },
+  pets: [],
+  noticesViewed: [],
+  noticesFavorites: [],
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
@@ -43,11 +44,12 @@ const authSlice = createSlice({
         state.user = {
           name: null,
           email: null,
+          phone: null,
           avatar: null,
-          pets: [],
-          noticesViewed: [],
-          noticesFavorites: [],
         };
+        state.pets = [];
+        state.noticesViewed = [];
+        state.noticesFavorites = [];
         state.token = null;
         state.isLoggedIn = false;
       })
@@ -56,7 +58,13 @@ const authSlice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user.name = action.payload.name;
+        state.user.email = action.payload.email;
+        state.user.phone = action.payload.phone;
+        state.user.avatar = action.payload.avatar;
+        state.pets = action.payload.pets;
+        state.noticesViewed = action.payload.noticesViewed;
+        state.noticesFavorites = action.payload.noticesFavorites;
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
@@ -64,17 +72,20 @@ const authSlice = createSlice({
         state.isRefreshing = false;
       })
 
-      .addCase(userFullInfo.pending, (state) => {
-        state.isRefreshing = true;
-      })
-      .addCase(userFullInfo.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.isLoggedIn = true;
-        state.isRefreshing = false;
-      })
-      .addCase(userFullInfo.rejected, (state) => {
-        state.isRefreshing = false;
-      })
+      // .addCase(userFullInfo.pending, (state) => {
+      //   state.isRefreshing = true;
+      // })
+      // .addCase(userFullInfo.fulfilled, (state, action) => {
+      //   state.user = action.payload;
+      //   state.pets = action.payload.pets;
+      //   state.noticesViewed = action.payload.noticesViewed;
+      //   state.noticesFavorites = action.payload.noticesFavorites;
+      //   state.isLoggedIn = true;
+      //   state.isRefreshing = false;
+      // })
+      // .addCase(userFullInfo.rejected, (state) => {
+      //   state.isRefreshing = false;
+      // })
 
       .addCase(userEdit.fulfilled, (state, action) => {
         const { name, email, phone, avatar } = action.payload;
@@ -82,13 +93,11 @@ const authSlice = createSlice({
       })
 
       .addCase(userAddPet.fulfilled, (state, action) => {
-        state.user.pets = [...state.user.pets, action.payload];
+        state.pets = [...state.pets, action.payload];
       })
 
       .addCase(userRemovePet.fulfilled, (state, action) => {
-        state.user.pets = state.user.pets.filter(
-          (pet) => pet.id !== action.meta.arg
-        );
+        state.pets = state.pets.filter((pet) => pet.id !== action.meta.arg);
       });
   },
 });
