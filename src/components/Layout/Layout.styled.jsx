@@ -239,10 +239,11 @@ export const LogoutButton = styled.button`
   height: 42px;
   border-radius: 30px;
   background-color: #fff4df;
-  transition: transform 150ms linear;
+  transition: transform 150ms linear, background-color 150ms linear;
 
   &:hover {
     transform: scale(1.1);
+    background-color: #fbe7c1;
   }
 
   @media screen and (min-width: 768px) {

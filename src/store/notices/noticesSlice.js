@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  addNotice,
+  deleteNotice,
   getCategories,
   getGenders,
   getLocations,
@@ -67,7 +69,19 @@ const noticesSlice = createSlice({
         state.locations = action.payload;
         state.isLoading = false;
       })
-      .addCase(getLocations.rejected, handleRejected);
+      .addCase(getLocations.rejected, handleRejected)
+
+      .addCase(addNotice.pending, handlePending)
+      .addCase(addNotice.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(addNotice.rejected, handleRejected)
+
+      .addCase(deleteNotice.pending, handlePending)
+      .addCase(deleteNotice.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(deleteNotice.rejected, handleRejected);
   },
 });
 

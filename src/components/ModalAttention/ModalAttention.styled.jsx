@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const ModalOverlay = styled.div`
   z-index: 10;
@@ -18,7 +19,7 @@ export const ModalContent = styled.div`
   z-index: 20;
   background-color: #ffffff;
   border-radius: 30px;
-  padding: 40px 28px;
+  padding: 40px 20px;
   display: inline-flex;
   flex-direction: column;
   max-width: 335px;
@@ -27,8 +28,8 @@ export const ModalContent = styled.div`
   overflow: overlay;
 
   @media screen and (min-width: 768px) {
-    max-width: 448px;
-    padding: 80px;
+    max-width: 466px;
+    padding: 60px;
   }
 `;
 
@@ -65,13 +66,13 @@ export const Span = styled.span`
   margin: 0 auto;
 `;
 
-export const Text = styled.p`
+export const Title = styled.p`
+  color: #f6b83d;
   font-size: 20px;
   font-weight: 700;
   line-height: 20px;
   letter-spacing: -0.6px;
-  text-align: center;
-  margin: 20px 0 28px;
+  margin: 20px auto;
 
   @media screen and (min-width: 768px) {
     font-size: 24px;
@@ -80,21 +81,41 @@ export const Text = styled.p`
   }
 `;
 
+export const Text = styled.p`
+  color: #2b2b2a;
+  text-align: center;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -0.28px;
+  margin-bottom: 24px;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 28px;
+  }
+`;
+
 export const ButtonWrap = styled.div`
   display: flex;
   gap: 8px;
+
+  @media screen and (min-width: 768px) {
+    margin: 0 auto;
+  }
 `;
 
-export const ButtonConfirm = styled.button`
+export const StyledLinkLogin = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #ffffff;
   font-size: 14px;
   font-weight: 700;
   line-height: 18px;
   letter-spacing: -0.42px;
-  width: 137px;
+  width: 135px;
   height: 42px;
   border-radius: 30px;
-  background: #f6b83d;
+  background-color: #f6b83d;
   transition: transform 150ms linear, background-color 150ms linear;
 
   &:hover {
@@ -111,15 +132,19 @@ export const ButtonConfirm = styled.button`
   }
 `;
 
-export const ButtonCancel = styled.button`
+export const StyledLinkRegister = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #f6b83d;
   font-size: 14px;
   font-weight: 700;
   line-height: 18px;
   letter-spacing: -0.42px;
-  width: 134px;
+  width: 129px;
   height: 42px;
   border-radius: 30px;
-  background: rgba(38, 38, 38, 0.05);
+  background-color: #fff4df;
   transition: transform 150ms linear, background-color 150ms linear;
 
   &:hover {

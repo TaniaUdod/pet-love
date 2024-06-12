@@ -1,33 +1,22 @@
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { logOut } from "../../store/auth/operations";
-import cat from "../../images/cat.png";
-import cat2x from "../../images/cat@2x.png";
 import sprite from "../../images/sprite.svg";
+import dog from "../../images/dog.png";
+import dog2x from "../../images/dog@2x.png";
 import {
-  ButtonCancel,
-  ButtonConfirm,
   ButtonWrap,
   CloseButton,
   ModalContent,
   ModalOverlay,
   Span,
+  StyledLinkLogin,
+  StyledLinkRegister,
   Text,
-} from "./ModalApproveAction.styled";
+  Title,
+} from "./ModalAttention.styled";
 
-const ModalApproveAction = ({ onClose }) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
+const ModalAttention = ({ onClose }) => {
   const handleClose = () => {
-    onClose();
-  };
-
-  const handleConfirm = () => {
-    dispatch(logOut());
-    navigate("/");
     onClose();
   };
 
@@ -61,23 +50,27 @@ const ModalApproveAction = ({ onClose }) => {
             <use href={`${sprite}#icon-close`} />
           </svg>
         </CloseButton>
-        <div>
-          <Span>
-            <picture>
-              <source srcSet={cat2x} media="(min-resolution: 192dpi)" />
-              <img src={cat} alt="cat" width="44px" height="44px" />
-            </picture>
-          </Span>
-          <Text>Already leaving?</Text>
-          <ButtonWrap>
-            <ButtonConfirm onClick={handleConfirm}>Yes</ButtonConfirm>
-            <ButtonCancel onClick={handleClose}>Cancel</ButtonCancel>
-          </ButtonWrap>
-        </div>
+        <Span>
+          <picture>
+            <source srcSet={dog2x} media="(min-resolution: 192dpi)" />
+            <img src={dog} alt="cat" width="44px" height="44px" />
+          </picture>
+        </Span>
+        <Title>Attention</Title>
+        <Text>
+          We would like to remind you that certain functionality is available
+          only to authorized users.If you have an account, please log in with
+          your credentials. If you do not already have an account, you must
+          register to access these features.
+        </Text>
+        <ButtonWrap>
+          <StyledLinkLogin to="/login">Log In</StyledLinkLogin>
+          <StyledLinkRegister to="/register">Registration</StyledLinkRegister>
+        </ButtonWrap>
       </ModalContent>
     </ModalOverlay>,
     document.getElementById("modal-root")
   );
 };
 
-export default ModalApproveAction;
+export default ModalAttention;
