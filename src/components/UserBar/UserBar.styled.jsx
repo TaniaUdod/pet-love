@@ -15,6 +15,22 @@ export const Button = styled.button`
   height: 40px;
   border-radius: 50%;
   background-color: #fff4df;
+
+  @media screen and (min-width: 768px) {
+    width: 50px;
+    height: 50px;
+  }
+`;
+
+export const Img = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  @media screen and (min-width: 768px) {
+    width: 50px;
+    height: 50px;
+  }
 `;
 
 export const UserName = styled.p`

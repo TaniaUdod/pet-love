@@ -5,7 +5,6 @@ import { refreshUser } from "../store/auth/operations";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 import Layout from "./Layout/Layout";
-import Profile from "./Profile/Profile";
 
 const Home = lazy(() => import("../pages/Home/Home"));
 const Register = lazy(() => import("../pages/Register/Register"));
@@ -13,6 +12,7 @@ const Login = lazy(() => import("../pages/Login/Login"));
 const News = lazy(() => import("../pages/News/News"));
 const Notices = lazy(() => import("../pages/Notices/Notices"));
 const OurFriends = lazy(() => import("../pages/OurFriends/OurFriends"));
+const Profile = lazy(() => import("../pages/Profile/Profile"));
 const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
 
 const App = () => {

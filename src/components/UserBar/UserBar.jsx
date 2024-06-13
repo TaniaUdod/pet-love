@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn, selectUser } from "../../store/auth/selectors";
 import sprite from "../../images/sprite.svg";
-import { Button, StyledLink, UserName } from "./UserBar.styled";
+import { Button, Img, StyledLink, UserName } from "./UserBar.styled";
 
 const UserBar = ({ ishome }) => {
   const user = useSelector(selectUser);
@@ -12,17 +12,17 @@ const UserBar = ({ ishome }) => {
     return null;
   }
 
-  const avatar = user.avatar ? (
-    <img src={user.avatar} alt="user avatar" />
-  ) : (
-    <svg width="20" height="20">
-      <use href={`${sprite}#icon-user`} />
-    </svg>
-  );
-
   return (
     <StyledLink to="/profile">
-      <Button type="button">{avatar}</Button>
+      <Button type="button">
+        {user.avatar ? (
+          <Img src={user.avatar} alt="user avatar" />
+        ) : (
+          <svg width="20" height="20" fill="#f6b83d" stroke="#f6b83d">
+            <use href={`${sprite}#icon-user`} />
+          </svg>
+        )}
+      </Button>
       <UserName ishome={ishome.toString()}>{user.name}</UserName>
     </StyledLink>
   );
