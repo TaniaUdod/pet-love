@@ -13,6 +13,7 @@ const News = lazy(() => import("../pages/News/News"));
 const Notices = lazy(() => import("../pages/Notices/Notices"));
 const OurFriends = lazy(() => import("../pages/OurFriends/OurFriends"));
 const Profile = lazy(() => import("../pages/Profile/Profile"));
+const AddPet = lazy(() => import("../pages/AddPet/AddPet"));
 const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
 
 const App = () => {
@@ -41,10 +42,18 @@ const App = () => {
         />
         <Route
           path="/profile"
-          element={<PrivateRoute redirectTo="/login" component={<Profile />} />}
+          element={
+            <PrivateRoute redirectTo="/profile" component={<Profile />} />
+          }
         />
+        <Route
+          path="/add-pet"
+          element={
+            <PrivateRoute redirectTo="/profile" component={<AddPet />} />
+          }
+        />
+        <Route path="*" element={<NotFound />} />
       </Route>
-      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };
