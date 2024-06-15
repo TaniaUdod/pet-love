@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { userAddPet } from "../../store/auth/operations";
+import { refreshUser, userAddPet } from "../../store/auth/operations";
 import { selectTypes } from "../../store/notices/selectors";
 import { getTypes } from "../../store/notices/operations";
 import { Controller, useForm } from "react-hook-form";
@@ -121,6 +121,7 @@ const AddPetForm = () => {
 
   const onSubmit = (data) => {
     dispatch(userAddPet(data));
+    dispatch(refreshUser());
     navigate("/profile");
   };
 
