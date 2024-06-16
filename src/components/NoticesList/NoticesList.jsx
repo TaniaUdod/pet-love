@@ -6,7 +6,7 @@ const NoticesList = ({ notices }) => {
   return (
     <NoticesListWrap>
       {notices.map((notice) => (
-        <NoticesItem key={notice._id} {...notice} />
+        <NoticesItem key={notice._id} notice={notice} />
       ))}
     </NoticesListWrap>
   );

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addNotice,
@@ -10,9 +11,10 @@ import {
   selectIsLoggedIn,
 } from "../../store/auth/selectors";
 import { formatBirthday } from "../../helpers/formatBirthday";
-import sprite from "../../images/sprite.svg";
 import ModalAttention from "../ModalAttention/ModalAttention";
 import ModalNotice from "../ModalNotice/ModalNotice";
+import ModalFirstItemNotice from "../ModalFirstItemNotice/ModalFirstItemNotice";
+import sprite from "../../images/sprite.svg";
 import {
   ButtonFavorite,
   ButtonMore,
@@ -26,40 +28,55 @@ import {
   Title,
   TitleWrap,
 } from "./NoticesItem.styled";
-import ModalFirstItemNotice from "../ModalFirstItemNotice/ModalFirstItemNotice";
 
-const NoticesItem = ({
-  _id,
-  imgURL,
-  title,
-  popularity,
-  name,
-  birthday,
-  sex,
-  species,
-  category,
-  comment,
-}) => {
+const NoticesItem = (notice) => {
+  const {
+    _id,
+    imgURL,
+    name,
+    title,
+    birthday,
+    sex,
+    species,
+    popularity,
+    comment,
+    category,
+  } = notice.notice;
+
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
   const [showAttentionModal, setShowAttentionModal] = useState(false);
   const [showNoticeModal, setShowNoticeModal] = useState(false);
   const [showFirstNotice, setShowFirstNotice] = useState(false);
+  const [isViewedPage, setIsViewedPage] = useState(false);
 
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const favoritesNotices = useSelector(selectFavoritesNotices);
+
   const [isFavorite, setIsFavorite] = useState(
-    favoritesNotices?.find((favorite) => (favorite._id === _id ? true : false))
+    favoritesNotices.find((favorite) => (favorite._id === _id ? true : false))
   );
 
+  const location = useLocation();
+  const isprofile = location.pathname === "/profile";
+
   useEffect(() => {
-    setIsFavorite(favoritesNotices?.some((favorite) => favorite._id === _id));
-  }, [favoritesNotices, _id]);
+    if (isprofile) {
+      setIsViewedPage(true);
+    } else {
+      setIsViewedPage(false);
+    }
+  }, [isprofile]);
+
+  useEffect(() => {
+    if (showNoticeModal && !isViewedPage) {
+      dispatch(getOneNotice(_id));
+    }
+  }, [dispatch, _id, isViewedPage, showNoticeModal]);
 
   const handleLearnMore = () => {
     if (!isLoggedIn) {
       setShowAttentionModal(true);
     } else {
-      dispatch(getOneNotice(_id));
       setShowNoticeModal(true);
     }
   };
@@ -91,8 +108,8 @@ const NoticesItem = ({
   };
 
   return (
-    <NoticesItemContainer>
-      <Img src={imgURL} alt={title} />
+    <NoticesItemContainer isprofile={isprofile.toString()}>
+      <Img src={imgURL} alt={title} isprofile={isprofile.toString()} />
       <TitleWrap>
         <Title>{title}</Title>
         <PopularityWrap>
@@ -103,7 +120,7 @@ const NoticesItem = ({
         </PopularityWrap>
       </TitleWrap>
 
-      <DetailsWrap>
+      <DetailsWrap isprofile={isprofile.toString()}>
         <DetailsTitle>
           Name <span>{name}</span>
         </DetailsTitle>
@@ -121,29 +138,35 @@ const NoticesItem = ({
         </DetailsTitle>
       </DetailsWrap>
 
-      <Comment>{comment}</Comment>
+      <Comment isprofile={isprofile.toString()}>{comment}</Comment>
 
       <ButtonWrap>
-        <ButtonMore type="button" onClick={handleLearnMore}>
+        <ButtonMore
+          type="button"
+          onClick={handleLearnMore}
+          isprofile={isprofile.toString()}
+        >
           Learn more
         </ButtonMore>
 
-        <ButtonFavorite type="button" onClick={handleFavoriteClick}>
-          {!isLoggedIn ? (
-            <svg width="18" height="18" stroke="#f6b83d" fill="none">
-              <use href={`${sprite}#icon-heart`} />
-            </svg>
-          ) : (
-            <svg
-              width="18"
-              height="18"
-              fill={isFavorite ? "#f6b83d" : "none"}
-              stroke="#f6b83d"
-            >
-              <use href={`${sprite}#icon-heart`} />
-            </svg>
-          )}
-        </ButtonFavorite>
+        {!isprofile && (
+          <ButtonFavorite type="button" onClick={handleFavoriteClick}>
+            {!isLoggedIn ? (
+              <svg width="18" height="18" stroke="#f6b83d" fill="none">
+                <use href={`${sprite}#icon-heart`} />
+              </svg>
+            ) : (
+              <svg
+                width="18"
+                height="18"
+                fill={isFavorite ? "#f6b83d" : "none"}
+                stroke="#f6b83d"
+              >
+                <use href={`${sprite}#icon-heart`} />
+              </svg>
+            )}
+          </ButtonFavorite>
+        )}
       </ButtonWrap>
 
       {showAttentionModal && <ModalAttention onClose={closeModal} />}
@@ -151,7 +174,7 @@ const NoticesItem = ({
         <ModalNotice
           isFavorite={isFavorite}
           setIsFavorite={setIsFavorite}
-          noticeId={_id}
+          notice={notice.notice}
           onClose={closeModal}
           setShowFirstNotice={setShowFirstNotice}
         />

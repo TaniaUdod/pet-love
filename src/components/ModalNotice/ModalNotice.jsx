@@ -1,17 +1,16 @@
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addNotice,
   deleteNotice,
   getOneNotice,
 } from "../../store/notices/operations";
-import { selectNotices } from "../../store/notices/selectors";
 import { selectFavoritesNotices } from "../../store/auth/selectors";
-import sprite from "../../images/sprite.svg";
-import StarRating from "../StarRating/StarRating";
 import { formatBirthday } from "../../helpers/formatBirthday";
+import StarRating from "../StarRating/StarRating";
+import sprite from "../../images/sprite.svg";
 import {
   ButtonContact,
   ButtonFavorite,
@@ -29,21 +28,34 @@ import {
 
 const ModalNotice = ({
   isFavorite,
-  noticeId,
+  notice,
   onClose,
   setIsFavorite,
   setShowFirstNotice,
 }) => {
   const dispatch = useDispatch();
 
-  const allNotices = useSelector(selectNotices);
-  const notice = allNotices.results.find((item) => item._id === noticeId);
+  const {
+    _id,
+    imgURL,
+    name,
+    title,
+    birthday,
+    sex,
+    species,
+    popularity,
+    comment,
+    category,
+  } = notice;
 
   const favoritesNotices = useSelector(selectFavoritesNotices) || [];
 
   useEffect(() => {
-    dispatch(getOneNotice(noticeId));
-  }, [dispatch, noticeId]);
+    dispatch(getOneNotice(_id));
+  }, [dispatch, _id]);
+
+  const location = useLocation();
+  const isprofile = location.pathname === "/profile";
 
   const handleClose = () => {
     onClose();
@@ -73,13 +85,13 @@ const ModalNotice = ({
 
   const handleFavoriteClick = () => {
     if (isFavorite) {
-      dispatch(deleteNotice(noticeId));
+      dispatch(deleteNotice(_id));
       setIsFavorite(false);
     } else {
       if (favoritesNotices.length === 0) {
         setShowFirstNotice(true);
       }
-      dispatch(addNotice(noticeId));
+      dispatch(addNotice(_id));
       setIsFavorite(true);
     }
   };
@@ -93,37 +105,39 @@ const ModalNotice = ({
           </svg>
         </CloseButton>
 
-        <Img src={notice.imgURL} alt={notice.title} />
-        <Category>{notice.category}</Category>
+        <Img src={imgURL} alt={title} />
+        <Category>{category}</Category>
 
-        <Title>{notice.title}</Title>
-        <StarRating popularity={notice.popularity} />
+        <Title>{title}</Title>
+        <StarRating popularity={popularity} />
 
         <DetailsWrap>
           <DetailsTitle>
-            Name <span>{notice.name}</span>
+            Name <span>{name}</span>
           </DetailsTitle>
           <DetailsTitle>
-            Birthday <span>{formatBirthday(notice.birthday)}</span>
+            Birthday <span>{formatBirthday(birthday)}</span>
           </DetailsTitle>
           <DetailsTitle>
-            Sex <span>{notice.sex}</span>
+            Sex <span>{sex}</span>
           </DetailsTitle>
           <DetailsTitle>
-            Species <span>{notice.species}</span>
+            Species <span>{species}</span>
           </DetailsTitle>
         </DetailsWrap>
 
-        <Comment>{notice.comment}</Comment>
+        <Comment>{comment}</Comment>
 
         <ButtonWrap>
-          <ButtonFavorite type="button" onClick={handleFavoriteClick}>
-            {isFavorite ? "Remove from" : "Add to"}
-            <svg width="18" height="18" stroke="#FFFFFF" fill="none">
-              <use href={`${sprite}#icon-heart`} />
-            </svg>
-          </ButtonFavorite>
-          <ButtonContact type="button">
+          {!isprofile && (
+            <ButtonFavorite type="button" onClick={handleFavoriteClick}>
+              {isFavorite ? "Remove from" : "Add to"}
+              <svg width="18" height="18" stroke="#FFFFFF" fill="none">
+                <use href={`${sprite}#icon-heart`} />
+              </svg>
+            </ButtonFavorite>
+          )}
+          <ButtonContact type="button" isprofile={isprofile.toString()}>
             <Link to={"mailto:test@gmail.com"} target="_blank">
               Contact
             </Link>

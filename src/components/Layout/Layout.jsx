@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../../store/auth/selectors";
@@ -26,11 +26,17 @@ import {
 } from "./Layout.styled";
 
 const Layout = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-
+  const menuRef = useRef(null);
   const location = useLocation();
   const ishome = location.pathname === "/";
+
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -38,17 +44,22 @@ const Layout = () => {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
-  };
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <Container>
@@ -93,7 +104,7 @@ const Layout = () => {
         </BurgerButton>
       </Header>
 
-      <BurgerMenu open={isMenuOpen}>
+      <BurgerMenu open={isMenuOpen} ref={menuRef}>
         <CloseButton type="button" onClick={closeMenu}>
           <svg width="32" height="32" fill="none" stroke="#262626">
             <use href={`${sprite}#icon-close`} />
@@ -115,7 +126,7 @@ const Layout = () => {
         {isLoggedIn ? (
           <>
             <LogoutButton onClick={openModal}>Log out</LogoutButton>
-            {isModalOpen && <ModalApproveAction onClose={closeModal} />}
+            {isModalOpen && <ModalApproveAction onClose={closeMenu} />}
           </>
         ) : (
           <MobLinkNav>

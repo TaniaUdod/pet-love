@@ -66,26 +66,6 @@ export const refreshUser = createAsyncThunk(
   }
 );
 
-// export const userFullInfo = createAsyncThunk(
-//   "auth/fullInfo",
-//   async (_, thunkAPI) => {
-//     const state = thunkAPI.getState();
-//     const persistedToken = state.auth.token;
-
-//     if (persistedToken === null) {
-//       return thunkAPI.rejectWithValue("Unable to fetch user");
-//     }
-
-//     try {
-//       setAuthHeader(persistedToken);
-//       const { data } = await axios.get("/users/current/full");
-//       return data;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
-
 export const userEdit = createAsyncThunk(
   "auth/edit",
   async (body, thunkAPI) => {

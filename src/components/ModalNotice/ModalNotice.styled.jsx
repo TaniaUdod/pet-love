@@ -84,9 +84,6 @@ export const Category = styled.p`
     line-height: 18px;
     letter-spacing: -0.28px;
   }
-
-  @media screen and (min-width: 1280px) {
-  }
 `;
 
 export const Title = styled.p`
@@ -100,9 +97,6 @@ export const Title = styled.p`
     font-weight: 700;
     line-height: 24px;
     margin: 16px auto 10px;
-  }
-
-  @media screen and (min-width: 1280px) {
   }
 `;
 
@@ -190,6 +184,7 @@ export const ButtonContact = styled.button`
   border-radius: 30px;
   background-color: #fff4df;
   transition: transform 150ms linear, background-color 150ms linear;
+  margin: ${({ isprofile }) => (isprofile === "true" ? "0 auto" : "")};
 
   &:hover {
     transform: scale(1.1);

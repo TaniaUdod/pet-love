@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export const NoticesItemContainer = styled.div`
+export const FavoritesItemContainer = styled.div`
   border-radius: 16px;
-  padding: 24px;
   background: #ffffff;
+  padding: 24px;
   margin-bottom: 20px;
 
   &:last-child {
@@ -13,15 +13,11 @@ export const NoticesItemContainer = styled.div`
   @media screen and (min-width: 768px) {
     width: calc((100% - 20px) / 2);
     margin-bottom: 0;
-    padding: ${({ isprofile }) => (isprofile === "true" ? "14px" : "24px")};
   }
 
   @media screen and (min-width: 1280px) {
-    width: ${({ isprofile }) =>
-      isprofile === "true"
-        ? "calc((100% - 24px) / 2)"
-        : "calc((100% - 32px) / 3)"};
-    max-width: 363px;
+    width: calc((100% - 24px) / 2);
+    max-width: 664px;
   }
 `;
 
@@ -33,9 +29,7 @@ export const Img = styled.img`
   object-fit: cover;
 
   @media screen and (min-width: 768px) {
-    width: ${({ isprofile }) => (isprofile === "true" ? "314px" : "294px")};
-    margin-bottom: ${({ isprofile }) =>
-      isprofile === "true" ? "14px" : "24px"};
+    width: 294px;
   }
 
   @media screen and (min-width: 1280px) {
@@ -76,8 +70,8 @@ export const DetailsWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: ${({ isprofile }) => (isprofile === "true" ? "16px" : "14px")};
-  margin-bottom: ${({ isprofile }) => (isprofile === "true" ? "14px" : "16px")};
+  gap: 14px;
+  margin-bottom: 16px;
 
   @media screen and (min-width: 1280px) {
     gap: 20px;
@@ -108,8 +102,7 @@ export const Comment = styled.p`
   margin-bottom: 24px;
 
   @media screen and (min-width: 768px) {
-    margin-bottom: ${({ isprofile }) =>
-      isprofile === "true" ? "42px" : "32px"};
+    margin-bottom: 32px;
   }
 `;
 
@@ -124,8 +117,8 @@ export const ButtonMore = styled.button`
   font-size: 14px;
   line-height: 18px;
   letter-spacing: -0.42px;
-  width: ${({ isprofile }) => (isprofile === "true" ? "233px" : "231px")};
-  height: ${({ isprofile }) => (isprofile === "true" ? "44px" : "46px")};
+  width: 231px;
+  height: 46px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -139,12 +132,12 @@ export const ButtonMore = styled.button`
   }
 
   @media screen and (min-width: 768px) {
-    width: ${({ isprofile }) => (isprofile === "true" ? "314px" : "236px")};
-    height: ${({ isprofile }) => (isprofile === "true" ? "44px" : "48px")};
+    width: 236px;
+    height: 48px;
   }
 
   @media screen and (min-width: 1280px) {
-    width: ${({ isprofile }) => (isprofile === "true" ? "292px" : "257px")};
+    width: 257px;
   }
 `;
 

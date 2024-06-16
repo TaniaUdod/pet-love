@@ -7,3 +7,5 @@ export const selectIsRefreshing = (state) => state.auth.isRefreshing;
 export const selectUserPets = (state) => state.auth.pets;
 
 export const selectFavoritesNotices = (state) => state.auth.noticesFavorites;
+
+export const selectViewedNotices = (state) => state.auth.noticesViewed;
