@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+# PetLove
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+PetLove is an application that helps people find pets, manage their pets, and connect with other pet owners. It allows users to create profiles for their pets, keep up with pet-related news, view announcements about pets, and connect with other users in the pet community.
 
-## Available Scripts
+## Technologies Used
 
-In the project directory, you can run:
+- **React** to build the user interface and manage components efficiently.
+- **React Router** for navigation, enabling users to switch between different views seamlessly.
+- **React Hook Form and Yup** for form handling and validation, ensuring robust and user-friendly forms.
+- **Redux** for state management, providing a centralized store for user and pet data, facilitating efficient data management.
+- **Redux Persist** to persist the Redux store data to the browser's local storage, ensuring a visually appealing and maintainable design.
+- **Styled components** for styling the application, ensuring a visually appealing design.
+- **Responsive design** adapting to different screen sizes, providing a seamless user experience on mobile, tablet, and desktop devices.
 
-### `npm start`
+## Layout
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The application layout includes four main pages: "Home", "News", "Find pet", and "Our friends". The app also features Registration and Login pages for authentication.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Public Pages
 
-### `npm test`
+- **Home**: This page will appear first when you load the app and if the user logs out from their profile. It contains the main title with a hero image.
+- **News**: Page with a list of news about animals and pets, with a search bar and pagination. Clicking "Read more" will open the news resource in a new browser tab.
+- **Find pet**: Page with a list of existing pets, with pagination and a search-filter bar where users can filter the list of animals by various parameters like type, gender, location, price, popularity, species, and keyword.
+- **Our friends**: Page with a list of companies contacts that help our pets a lot.
+- **Registration page**: Page with a form for registering a new user.
+- **Login page**: Page for logging in a user to the app.
+- **404 page**: If there is an incorrect URL, the user is redirected to the 404 page. This page has a button to go to the Home page.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Private Pages
 
-### `npm run build`
+- **Profile**: Page with information about the user, including a list of the user's pets, and a list of favorite and viewed pets. On this page, users can change their avatar and other information about themselves. To create a new pet, users can go to the Add-pet page.
+- **Add-pet**: Page with a form for creating a new pet for the current user.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![README-img](./public/README-img.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Getting Started
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Installation
 
-### `npm run eject`
+1. Clone this repository.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+git clone https://github.com/TaniaUdod/pet-love.git
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. Install dependencies.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. Run the application.
 
-## Learn More
+```bash
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The application will run on http://localhost:3000/.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Accessing the Application Online
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+If you want to access the application online, you can visit
+https://taniaudod.github.io/pet-love/.
