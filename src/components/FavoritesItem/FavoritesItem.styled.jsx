@@ -5,6 +5,8 @@ export const FavoritesItemContainer = styled.div`
   background: #ffffff;
   padding: 24px;
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
 
   &:last-child {
     margin-bottom: 0;
@@ -110,6 +112,7 @@ export const ButtonWrap = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: auto;
 `;
 
 export const ButtonMore = styled.button`

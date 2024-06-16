@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 axios.defaults.baseURL = "https://petlove.b.goit.study/api/";
 
@@ -17,8 +18,10 @@ export const register = createAsyncThunk(
     try {
       const { data } = await axios.post("/users/signup", credentials);
       setAuthHeader(data.token);
+      toast.success("You have successfully register");
       return data;
     } catch (error) {
+      toast.error("Email already in use!");
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -30,8 +33,10 @@ export const logIn = createAsyncThunk(
     try {
       const { data } = await axios.post("/users/signin", credentials);
       setAuthHeader(data.token);
+      toast.success("You have successfully logged");
       return data;
     } catch (error) {
+      toast.error("Email or password is wrong!");
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -40,8 +45,10 @@ export const logIn = createAsyncThunk(
 export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
     await axios.post("/users/signout");
+    toast.success("Sign out success");
     clearAuthHeader();
   } catch (error) {
+    toast.error("Error, server not answer!");
     return thunkAPI.rejectWithValue(error.message);
   }
 });
@@ -79,8 +86,10 @@ export const userEdit = createAsyncThunk(
     try {
       setAuthHeader(persistedToken);
       const { data } = await axios.patch("/users/current/edit", body);
+      toast.success("Successfully updated profile");
       return data;
     } catch (error) {
+      toast.error("Error, server not answer!");
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -99,8 +108,10 @@ export const userAddPet = createAsyncThunk(
     try {
       setAuthHeader(persistedToken);
       const { data } = await axios.post("/users/current/pets/add", body);
+      toast.success("Successfully added pet");
       return data;
     } catch (error) {
+      toast.error("Error, server not answer!");
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -119,8 +130,10 @@ export const userRemovePet = createAsyncThunk(
     try {
       setAuthHeader(persistedToken);
       const { data } = await axios.delete(`/users/current/pets/remove/${id}`);
+      toast.success("Successfully removed pet");
       return data;
     } catch (error) {
+      toast.error("Error, server not answer!");
       return thunkAPI.rejectWithValue(error.message);
     }
   }

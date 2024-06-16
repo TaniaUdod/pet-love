@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { logIn as logInUser } from "../../store/auth/operations";
+import { logIn } from "../../store/auth/operations";
 import sprite from "../../images/sprite.svg";
 import {
   Button,
@@ -51,15 +50,10 @@ const LoginForm = () => {
   });
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    try {
-      dispatch(logInUser(data));
-      navigate("/profile");
-    } catch (error) {
-      console.error("Failed to logIn user:", error);
-    }
+    const { email, password } = data;
+    dispatch(logIn({ email, password }));
   };
 
   return (

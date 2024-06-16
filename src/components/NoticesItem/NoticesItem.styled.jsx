@@ -5,6 +5,8 @@ export const NoticesItemContainer = styled.div`
   padding: 24px;
   background: #ffffff;
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
 
   &:last-child {
     margin-bottom: 0;
@@ -75,7 +77,6 @@ export const PopularityWrap = styled.div`
 export const DetailsWrap = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
   gap: ${({ isprofile }) => (isprofile === "true" ? "16px" : "14px")};
   margin-bottom: ${({ isprofile }) => (isprofile === "true" ? "14px" : "16px")};
 
@@ -117,6 +118,7 @@ export const ButtonWrap = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: auto;
 `;
 
 export const ButtonMore = styled.button`

@@ -50,36 +50,38 @@ const FavoritesItem = ({ notice, onRemoveFavorites, favorites }) => {
 
   return (
     <FavoritesItemContainer>
-      <Img src={imgURL} alt={title} />
-      <TitleWrap>
-        <Title>{title}</Title>
-        <PopularityWrap>
-          <svg width="16" height="16" fill="#FFC531">
-            <use href={`${sprite}#icon-star`} />
-          </svg>
-          {popularity}
-        </PopularityWrap>
-      </TitleWrap>
+      <div>
+        <Img src={imgURL} alt={title} />
+        <TitleWrap>
+          <Title>{title}</Title>
+          <PopularityWrap>
+            <svg width="16" height="16" fill="#FFC531">
+              <use href={`${sprite}#icon-star`} />
+            </svg>
+            {popularity}
+          </PopularityWrap>
+        </TitleWrap>
 
-      <DetailsWrap>
-        <DetailsTitle>
-          Name <span>{name}</span>
-        </DetailsTitle>
-        <DetailsTitle>
-          Birthday <span>{formatBirthday(birthday)}</span>
-        </DetailsTitle>
-        <DetailsTitle>
-          Sex <span>{sex}</span>
-        </DetailsTitle>
-        <DetailsTitle>
-          Species <span>{species}</span>
-        </DetailsTitle>
-        <DetailsTitle>
-          Category <span>{category}</span>
-        </DetailsTitle>
-      </DetailsWrap>
+        <DetailsWrap>
+          <DetailsTitle>
+            Name <span>{name}</span>
+          </DetailsTitle>
+          <DetailsTitle>
+            Birthday <span>{formatBirthday(birthday)}</span>
+          </DetailsTitle>
+          <DetailsTitle>
+            Sex <span>{sex}</span>
+          </DetailsTitle>
+          <DetailsTitle>
+            Species <span>{species}</span>
+          </DetailsTitle>
+          <DetailsTitle>
+            Category <span>{category}</span>
+          </DetailsTitle>
+        </DetailsWrap>
 
-      <Comment>{comment}</Comment>
+        <Comment>{comment}</Comment>
+      </div>
 
       <ButtonWrap>
         <ButtonMore type="button" onClick={handleLearnMore}>

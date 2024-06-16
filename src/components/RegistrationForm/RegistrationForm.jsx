@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -62,16 +61,10 @@ const RegistrationForm = () => {
   });
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     const { confirmPassword, ...registrationData } = data;
-    try {
-      dispatch(registerUser(registrationData));
-      navigate("/profile");
-    } catch (error) {
-      console.error("Failed to register user:", error);
-    }
+    dispatch(registerUser(registrationData));
   };
 
   return (

@@ -109,36 +109,38 @@ const NoticesItem = (notice) => {
 
   return (
     <NoticesItemContainer isprofile={isprofile.toString()}>
-      <Img src={imgURL} alt={title} isprofile={isprofile.toString()} />
-      <TitleWrap>
-        <Title>{title}</Title>
-        <PopularityWrap>
-          <svg width="16" height="16" fill="#FFC531">
-            <use href={`${sprite}#icon-star`} />
-          </svg>
-          {popularity}
-        </PopularityWrap>
-      </TitleWrap>
+      <div>
+        <Img src={imgURL} alt={title} isprofile={isprofile.toString()} />
+        <TitleWrap>
+          <Title>{title}</Title>
+          <PopularityWrap>
+            <svg width="16" height="16" fill="#FFC531">
+              <use href={`${sprite}#icon-star`} />
+            </svg>
+            {popularity}
+          </PopularityWrap>
+        </TitleWrap>
 
-      <DetailsWrap isprofile={isprofile.toString()}>
-        <DetailsTitle>
-          Name <span>{name}</span>
-        </DetailsTitle>
-        <DetailsTitle>
-          Birthday <span>{formatBirthday(birthday)}</span>
-        </DetailsTitle>
-        <DetailsTitle>
-          Sex <span>{sex}</span>
-        </DetailsTitle>
-        <DetailsTitle>
-          Species <span>{species}</span>
-        </DetailsTitle>
-        <DetailsTitle>
-          Category <span>{category}</span>
-        </DetailsTitle>
-      </DetailsWrap>
+        <DetailsWrap isprofile={isprofile.toString()}>
+          <DetailsTitle>
+            Name <span>{name}</span>
+          </DetailsTitle>
+          <DetailsTitle>
+            Birthday <span>{formatBirthday(birthday)}</span>
+          </DetailsTitle>
+          <DetailsTitle>
+            Sex <span>{sex}</span>
+          </DetailsTitle>
+          <DetailsTitle>
+            Species <span>{species}</span>
+          </DetailsTitle>
+          <DetailsTitle>
+            Category <span>{category}</span>
+          </DetailsTitle>
+        </DetailsWrap>
 
-      <Comment isprofile={isprofile.toString()}>{comment}</Comment>
+        <Comment isprofile={isprofile.toString()}>{comment}</Comment>
+      </div>
 
       <ButtonWrap>
         <ButtonMore

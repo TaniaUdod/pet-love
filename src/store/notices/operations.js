@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { setAuthHeader } from "../auth/operations";
+import toast from "react-hot-toast";
 
 export const getNotices = createAsyncThunk(
   "notices/getNotices",
@@ -125,8 +126,10 @@ export const addNotice = createAsyncThunk(
     try {
       setAuthHeader(persistedToken);
       const { data } = await axios.post(`/notices/favorites/add/${id}`);
+      toast.success("Successfully added to favorite");
       return data;
     } catch (error) {
+      toast.error("Error, server not answer!");
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -141,8 +144,10 @@ export const deleteNotice = createAsyncThunk(
     try {
       setAuthHeader(persistedToken);
       const { data } = await axios.delete(`/notices/favorites/remove/${id}`);
+      toast.success("Successfully removed from favorite");
       return data;
     } catch (error) {
+      toast.error("Error, server not answer!");
       return thunkAPI.rejectWithValue(error.message);
     }
   }

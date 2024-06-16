@@ -42,6 +42,7 @@ export const ButtonFavoritePets = styled.div`
     font-size: 16px;
     line-height: 20px;
     letter-spacing: -0.48px;
+    padding: 14px;
   }
 `;
 

@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { persistor, store } from "./store/store";
 import { PersistGate } from "redux-persist/integration/react";
+import { Toaster } from "react-hot-toast";
 import App from "./components/App";
 import "./index.css";
 
@@ -16,6 +17,7 @@ root.render(
           <App />
         </BrowserRouter>
       </PersistGate>
+      <Toaster />
     </Provider>
   </React.StrictMode>
 );
